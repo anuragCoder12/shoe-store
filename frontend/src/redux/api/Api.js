@@ -15,7 +15,7 @@ const apiSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    fetchProductsSuccess(state, action) {
+    fetchProductsSuccess:(state, action) => {
       state.isLoading = false;
       state.products = action.payload;
     },

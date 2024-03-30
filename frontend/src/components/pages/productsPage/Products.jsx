@@ -6,14 +6,20 @@ import { useNavigate } from "react-router-dom";
 const Products = () => {
   const { products, isLoading, error } = useSelector((state) => state.api);
   const dispatch = useDispatch();
+  const tokenString = localStorage.getItem("token");
+const token = tokenString 
+
+console.log("Token:", token);
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-  const navigate = useNavigate()
+      dispatch(fetchProducts(token));
+  }, [dispatch, token]);
+
   console.log(products);
+
+  const navigate = useNavigate()
   return (
     <>
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="w-full h-auto flex items-center justify-center">
         <div className="w-[90%] h-[90vh]  mt-[10vh] flex flex-col">
           <div className="w-full h-[60px] pt-[70px] flex items-center justify-between p-5">
             <h2 className="lg:text-4xl font-semibold font-serif">

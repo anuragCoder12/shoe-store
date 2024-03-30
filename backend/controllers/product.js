@@ -10,7 +10,7 @@ const createProduct = async (req, res) => {
   }
   const { title, price, details, color } = req.body;
   console.log(req.body)
-  const imageName = req.file.filename // Filename of the uploaded file
+  const imageName = req.file.filename 
   console.log(req.file)
   
     const product = await Product.create({

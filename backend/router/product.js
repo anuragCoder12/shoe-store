@@ -6,9 +6,9 @@ const {
     createProduct,
     getProduct
 } = require('../controllers/product')
+const requireAuth = require('../middleware/userAuth')
 
-
-
+router.use(requireAuth)
 
 //getting data
 router.get('/',getProduct)

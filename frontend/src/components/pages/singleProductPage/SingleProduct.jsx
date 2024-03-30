@@ -14,8 +14,8 @@ const SingleProduct = () => {
     },[dispatch])
     const {id} = useParams()
     //add to cart
-    const cartHandler = (productName, image, price) =>{
-      dispatch(addCartItem({ productName, image, price }))
+    const cartHandler = (productName, image, price, id) =>{
+      dispatch(addCartItem({ productName, image, price, id }))
     }
 
      const singleProduct = products.find((product) => product._id === id)
@@ -23,7 +23,7 @@ console.log(cartItems)
     return ( 
         <>
         <div className="flex flex-col items-center lg:flex-row">
-        <div className="lg:w-[55%] w-full h-[100vh]  flex flex-col items-center justify-center  ">
+        <div className="lg:w-[55%] w-full lg:h-[100vh]  flex flex-col items-center justify-center  ">
           <div className="lg:w-[450px] w-[70%] h-[400px]  lg:h-[600px] bg-white shadow-md cursor-pointer">
             {singleProduct ? (
               <img
@@ -44,7 +44,7 @@ console.log(cartItems)
             <div>
             </div>
             <button
-              onClick={() => cartHandler(singleProduct.title,`http://localhost:8001/images/${singleProduct.image}`,singleProduct.price)}
+              onClick={() => cartHandler(singleProduct.title,`http://localhost:8001/images/${singleProduct.image}`,singleProduct.price,singleProduct._id)}
               className={`lg:w-[500px] w-full h-[60px] border-[2px] shadow-lg border-${themeColor} rounded-full `}
             >
               Add to cart

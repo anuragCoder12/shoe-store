@@ -3,20 +3,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleNavbar } from "../../redux/navbar/navbar";
 import cart from "../../assets/Link → SVG.png";
 import { useNavigate } from "react-router-dom";
+// import { clearUsers } from "../../redux/userAuth/userAuth";
+// import { useEffect } from "react";
 const Navbar = () => {
   const { navShow } = useSelector((state) => state.navbar);
   const { themeColor } = useSelector((state) => state.hero);
   const { cartCount } = useSelector((state) => state.cart);
+  const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+ 
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     dispatch(clearUsers());
+  //   }
+  // }, [dispatch]);
+  // console.log(users)
+
+  // const handleClick = () => {
+  //   if(users){
+  //     localStorage.clear()
+  //     navigate('/')
+  //   }else{
+  //     navigate('/log-in')
+  //   }
+  // }
   const navLinks = [
     {
       title: "Home",
       path: "/",
     },
-    {
+     {
       title: "Products",
-      path: "/products",
+      path: `/products`,
     },
     {
       title: "Contact Us",
@@ -26,7 +47,8 @@ const Navbar = () => {
       title: "About Us",
       path: "/about-us",
     },
-  ];
+  ].filter(Boolean);
+ 
   return (
     <>
       <div className="  w-full h-[89.08px] bg-white shadow-lg flex items-center justify-between lg:justify-around z-10">
@@ -70,15 +92,17 @@ const Navbar = () => {
             className="cursor-pointer"
             onClick={() => navigate("/add-to-cart")}
           />
-          <div
+          {cartCount > 0 && <div
             className={`relative top-[-10px] left-[-20px] w-[17px] h-[17px] rounded-full bg-${themeColor} flex items-center justify-center`}
           >
             {cartCount}
-          </div>
+          </div>}
+          
           <button
+          // onClick={() => handleClick()}
             className={`w-[75px] h-[30px] lg:w-[100px] lg:h-[35px] bg-${themeColor} rounded-full hover:translate-y-[-5px] transition-transform duration-300 font-semibold ease-in-out `}
           >
-            Log in
+            {users ? "log out" : "log in"}
           </button>
         </div>
       </div>
